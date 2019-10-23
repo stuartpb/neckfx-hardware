@@ -76,14 +76,13 @@ module far_negative() {
   }
 }
 
-difference() {
-  near_positive();
-  near_negative();
+rotate([180,0,0]) difference() {
+  common_positive();
+  common_negative();
   difference() {
     union() {
       translate([-pearl_d/2, -pearl_d/2,-pearl_d]) cube(pearl_d);
       exclusion_zone();
-      
     }
     rotate([180,0,0]) exclusion_zone();
   }
