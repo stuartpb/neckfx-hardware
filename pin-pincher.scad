@@ -1,5 +1,5 @@
 pin_pitch = 2.54; // how evenly spaced the pins are
-shell_width = 2; // space for GPIO 2
+embrasure_width = 0.5;
 pin_length = 7;
 end_thickness = 0;
 pin_hold = 3;
@@ -81,9 +81,16 @@ difference() {
         pin_gauge]);
   }
   // gpio2 carveout
-  translate([pin_hold-overshot, pin_pitch*1.5-(shell_width-pin_pitch)/2,
-    pin_length+2.5*pin_pitch-(shell_width-pin_pitch)/2])
-    cube([pin_length+end_thickness+2*overshot,
-      shell_width,
-      shell_width]);
+  translate([0,
+    pin_pitch*2,
+    pin_length+4*pin_pitch-embrasure_width/2])
+    cube([pin_hold,pin_hold,embrasure_width]);
+  translate([0,
+    pin_pitch*2,
+    pin_length+3*pin_pitch-embrasure_width/2])
+    cube([pin_hold,pin_hold,embrasure_width]);
+  translate([0,
+    pin_pitch*2,
+    pin_length+2*pin_pitch-embrasure_width/2])
+    cube([pin_hold,pin_hold,embrasure_width]);
 }
