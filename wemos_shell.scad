@@ -24,14 +24,14 @@ peg_tolerance = 0.1;
 
 pin_grasp_length = 5;
 pin_press_length = 2.5;
-pin_hole = 1.2;
+pin_hole = 1.25;
 
-$fs=0.5;
+$fs=0.25;
 
 module quadranted () {
   union () {
-    children();
-    mirror([1,0]) children();
+    //children();
+    //mirror([1,0]) children();
     mirror([0,1]) children();
     rotate(180) children();
   }
@@ -48,13 +48,11 @@ difference () {
   }
   translate([0,0,-.5]) linear_extrude(pin_grasp_length+1) mirror([1,0,0]) union() {
     translate([0,4]) square([holder_length+holder_tolerance,holder_width+2+2*holder_tolerance],center=true);
-    translate([holder_length/2-8,-holder_width/2]) square([8,4]);
     for (x=pin_positions) {
       translate([-board_length/2+pin_start_distance+pin_pitch*x, -board_width/2+pin_edge_distance]) {
         circle(d=pin_hole);
-        translate([-0.1,0]) square([0.2,5]);
+        translate([-0.1,-5]) square([0.2,5]);
       }
     }
   }
-  translate ([0,0,pin_grasp_length]) cube([board_length+2,12,pin_grasp_length],center=true);
 }
