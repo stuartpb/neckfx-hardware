@@ -31,7 +31,6 @@ $fs=0.25;
 brim_height = 0.2;
 brim_distance = 0.2;
 brim_r=5;
-brim_gap = 0.1;
 
 tab_width = 4.5;
 tab_height = 4.5;
@@ -49,11 +48,7 @@ difference () {
     linear_extrude(pin_grasp_length) hull() mirrored()
       translate([board_length/2-outer_corner_r,0]) circle(r=outer_corner_r);
     mirrored() translate([board_length/2-outer_corner_r,0]) {
-      linear_extrude(brim_height) difference() {
-        circle(r=brim_r);
-        circle(r=outer_corner_r+brim_gap);
-        translate([-brim_r-1,-outer_corner_r-brim_gap]) square([brim_r+1,2*outer_corner_r+2*brim_gap]);
-      }
+      linear_extrude(brim_height) circle(r=brim_r);
       linear_extrude(pin_grasp_length+pin_press_length) circle(r=outer_corner_r);
       linear_extrude(pin_grasp_length+pin_press_length+board_thickness) circle(r=corner_hole_radius - peg_tolerance);
     }
